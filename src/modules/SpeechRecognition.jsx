@@ -18,7 +18,8 @@ export default function SpeechRecognitionContextProvider(props) {
             startListening,
             transcript,
             resetTranscript,
-            listening
+            listening,
+            SpeechRecognition
         }}>
             {props.children}
         </SpeechRecognitionContext.Provider>
