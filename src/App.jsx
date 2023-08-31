@@ -16,43 +16,37 @@ function App() {
   const [time, setTime] = useState(1000)
   const [timeoutId, setTimeoutId] = useState('')
 
-
+  // Inicializacion del metodo de busqueda
   useEffect(() => {
     startListening()
   }, [])
 
-
+  // manejo de la variable de control de habla y obtencion del exto impreso
   useEffect(() => {
 
     setControlHabla(true);
-    clearTimeout(timeoutId)
-    let transcript = document.getElementById('trancription')
-    setTextContainer(transcript.textContent);
+    clearTimeout(timeoutId) // reinicio del contador en los timpos de silencio
+    let transcriptLabel = document.getElementById('trancription')
+    setTextContainer(transcriptLabel.textContent);
 
   }, [transcript])
 
+  // al terminar cada insercion de habla cambiar de estado la variable de control
   useEffect(() => {
-
     setControlHabla(false);
-
   }, [textContainer])
 
-
-
+  // manejo para traduccion despues de un tiempo condifurado
   useEffect(() => {
-
-    let id = setTimeout(() => {
+    let id = setTimeout(() => { // inicializacion del contador
       if (controlHabla == false) {
-        translateApi(textContainer)
-        setTextContainer("")
+        translateApi(textContainer) //Funcion de traduccion 
+        resetTranscript()
       }
     }, time);
 
-    setTimeoutId(id)
-
+    setTimeoutId(id) //id del contador 
   }, [controlHabla])
-
-
 
   return (
     <>
