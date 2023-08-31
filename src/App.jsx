@@ -2,26 +2,26 @@ import './App.css'
 import 'regenerator-runtime/runtime';
 import { useState, useEffect, useContext } from 'react'
 import { SpeechRecognitionContext } from './modules/SpeechRecognition.jsx';
-import { GptTranslate } from './modules/GptTranslate';
 import { GoogleTranslate } from './modules/GoogleTranslate';
 
 function App() {
 
-  // const { transcriptTrans } = useContext(GptTranslate)
+  const TIME_SILENCE = import.meta.env.VITE_TIME_SILENCE
+
   const { translateApi, transcriptTrans } = useContext(GoogleTranslate)
-  const { transcript, startListening, resetTranscript, SpeechRecognition } = useContext(SpeechRecognitionContext)
+  const { transcript, resetTranscript, SpeechRecognition } = useContext(SpeechRecognitionContext)
 
   const [controlHabla, setControlHabla] = useState(false)
   const [textContainer, setTextContainer] = useState('')
-  const [time, setTime] = useState(1000)
+  const [time, setTime] = useState(TIME_SILENCE)
   const [timeoutId, setTimeoutId] = useState('')
 
-  // Inicializacion del metodo de busqueda
-  useEffect(() => {
-    startListening()
-  }, [])
+  // // Inicializacion del metodo de busqueda
+  // useEffect(() => {
+  //   startListening()
+  // }, [])
 
-  // manejo de la variable de control de habla y obtencion del exto impreso
+  // manejo de la variable de control de habla y obtencion del texto impreso
   useEffect(() => {
 
     setControlHabla(true);
@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     let id = setTimeout(() => { // inicializacion del contador
       if (controlHabla == false) {
-        translateApi(textContainer) //Funcion de traduccion 
+        translateApi(textContainer) //Funcion de traduccion
         resetTranscript()
       }
     }, time);
@@ -53,12 +53,14 @@ function App() {
       <div className="container">
         <div>
           <p id='trancription' >{transcript}</p>
-          <p>{transcriptTrans}</p>
+          <p id='transcriptTrans' >{transcriptTrans}</p>
 
           <button type="button" onClick={() => SpeechRecognition.stopListening()}>STOP</button>
 
+          <button id='speack'>START</button>
+
         </div>
-      </div>
+      </div >
     </>
   );
 }
