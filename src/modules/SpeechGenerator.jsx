@@ -1,22 +1,26 @@
 import { createContext, useContext, useEffect } from 'react'
 import { SpeechRecognitionContext } from './SpeechRecognition';
+import { LenguageDetection } from './LenguageDetection';
 
 export const SpeechGenerator = createContext();
 
 export default function SpeechGeneratorProvider(props) {
 
   const { startListening } = useContext(SpeechRecognitionContext)
+  const { lenguageVoice } = useContext(LenguageDetection)
 
   //Inicializacion de variables
   let speech = new SpeechSynthesisUtterance();
   let voices = [];
-  // let voiceSelect = document.querySelector("select");
 
-  //inicializacion de modulo de voz
-  window.speechSynthesis.onvoiceschanged = () => {
-    voices = window.speechSynthesis.getVoices();
-    speech.voice = voices[0];
-  };
+  useEffect(() => {
+    //inicializacion de modulo de voz
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = window.speechSynthesis.getVoices();
+      speech.voice = voices[lenguageVoice];
+    };
+  }, [lenguageVoice])
+
 
   useEffect(() => {
 

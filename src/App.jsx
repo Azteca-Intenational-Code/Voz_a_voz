@@ -3,23 +3,23 @@ import 'regenerator-runtime/runtime';
 import { useState, useEffect, useContext } from 'react'
 import { SpeechRecognitionContext } from './modules/SpeechRecognition.jsx';
 import { GoogleTranslate } from './modules/GoogleTranslate';
+import { LenguageDetection } from './modules/LenguageDetection';
 
 function App() {
 
   const TIME_SILENCE = import.meta.env.VITE_TIME_SILENCE
 
+  const [time, setTime] = useState(TIME_SILENCE)
+
+  const { LenguageDetectionResult } = useContext(LenguageDetection)
   const { translateApi, transcriptTrans } = useContext(GoogleTranslate)
   const { transcript, resetTranscript, SpeechRecognition } = useContext(SpeechRecognitionContext)
 
   const [controlHabla, setControlHabla] = useState(false)
-  const [textContainer, setTextContainer] = useState('')
-  const [time, setTime] = useState(TIME_SILENCE)
-  const [timeoutId, setTimeoutId] = useState('')
+  const [controlDetectionLenguage, setControlDetectionLenguage] = useState(true)
 
-  // // Inicializacion del metodo de busqueda
-  // useEffect(() => {
-  //   startListening()
-  // }, [])
+  const [textContainer, setTextContainer] = useState('')
+  const [timeoutId, setTimeoutId] = useState('')
 
   // manejo de la variable de control de habla y obtencion del texto impreso
   useEffect(() => {
@@ -39,7 +39,12 @@ function App() {
   // manejo para traduccion despues de un tiempo condifurado
   useEffect(() => {
     let id = setTimeout(() => { // inicializacion del contador
-      if (controlHabla == false) {
+      if (!controlHabla) {
+        if (controlDetectionLenguage && textContainer != '') {
+          console.log(transcript)
+          LenguageDetectionResult(transcript)
+          setControlDetectionLenguage(false) //Funcion de deteccion de lenguaje 
+        }
         translateApi(textContainer) //Funcion de traduccion
         resetTranscript()
       }
