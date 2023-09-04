@@ -14,9 +14,6 @@ export default function GoogleTranslateProvider(props) {
   const [transcriptTrans, setTranscriptTrans] = useState('')
 
   function translateApi(text) {
-
-    console.log("Lenguaje de salida: " + lenguageToTranslate)
-
     axios({
       method: "POST",
       url: API_URL_TRANSLATOR,

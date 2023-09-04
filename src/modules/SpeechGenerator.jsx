@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect } from 'react'
 import { SpeechRecognitionContext } from './SpeechRecognition';
 import { LenguageDetection } from './LenguageDetection';
+import { GoogleTranslate } from './GoogleTranslate';
+import SSMLBuilder from "ssml-builder";
 
 export const SpeechGenerator = createContext();
 
@@ -8,6 +10,7 @@ export default function SpeechGeneratorProvider(props) {
 
   const { startListening } = useContext(SpeechRecognitionContext)
   const { lenguageVoice } = useContext(LenguageDetection)
+  const { transcriptTrans } = useContext(GoogleTranslate)
 
   //Inicializacion de variables
   let speech = new SpeechSynthesisUtterance();
@@ -18,8 +21,15 @@ export default function SpeechGeneratorProvider(props) {
     window.speechSynthesis.onvoiceschanged = () => {
       voices = window.speechSynthesis.getVoices();
       speech.voice = voices[lenguageVoice];
+      speech.rate = '1'
     };
   }, [lenguageVoice])
+
+  //Monitorizacion del texto traducido
+  useEffect(() => {
+    speech.text = transcriptTrans
+    window.speechSynthesis.speak(speech)
+  }, [transcriptTrans])
 
 
   useEffect(() => {
@@ -29,25 +39,6 @@ export default function SpeechGeneratorProvider(props) {
       window.speechSynthesis.speak(speech)
       startListening()
     });
-
-    //Etiqueta donde se imprime el texto ya traducido
-    const paragraph = document.getElementById('transcriptTrans');
-
-    // Configuracion del observador
-    const observer = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
-        if (mutation.type === 'characterData') {
-          if (mutation.target.textContent != '""') {
-            speech.text = mutation.target.textContent
-            window.speechSynthesis.speak(speech)
-          }
-        }
-      });
-    });
-
-    // asignacion del observador
-    observer.observe(paragraph, { characterData: true, subtree: true });
-
 
   }, [])
 

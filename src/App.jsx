@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from 'react'
 import { SpeechRecognitionContext } from './modules/SpeechRecognition.jsx';
 import { GoogleTranslate } from './modules/GoogleTranslate';
 import { LenguageDetection } from './modules/LenguageDetection';
+import { Speech_IAContext } from './modules/Speech_IA';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
   const { LenguageDetectionResult } = useContext(LenguageDetection)
   const { translateApi, transcriptTrans } = useContext(GoogleTranslate)
   const { transcript, resetTranscript, SpeechRecognition } = useContext(SpeechRecognitionContext)
+  const { all } = useContext(Speech_IAContext)
 
   const [controlHabla, setControlHabla] = useState(false)
   const [controlDetectionLenguage, setControlDetectionLenguage] = useState(true)
@@ -53,19 +55,36 @@ function App() {
     setTimeoutId(id) //id del contador 
   }, [controlHabla])
 
+  useEffect(()=>{
+    all()
+  },[])
+
   return (
     <>
-      <div className="container">
+      <div className="flex flex-col justify-center items-center gap-10" >
+
         <div>
-          <p id='trancription' >{transcript}</p>
-          <p id='transcriptTrans' >{transcriptTrans}</p>
-
-          <button type="button" onClick={() => SpeechRecognition.stopListening()}>STOP</button>
-
-          <button id='speack'>START</button>
-
+          <h1>VOZ A VOZ</h1>
         </div>
-      </div >
+
+        <div className='flex gap-10'>
+          <div className='flex flex-col text-center gap-5'>
+            <h2>DETECCION</h2>
+            <p className='flex bg-slate-900 min-h-[30vh] min-w-[50vh] items-center justify-center' id='trancription' >{transcript}</p>
+          </div>
+          <div className='flex flex-col text-center gap-5'>
+            <h2>TRADUCCION</h2>
+            <p className='flex bg-slate-900 min-h-[30vh] min-w-[50vh] items-center justify-center' id='transcriptTrans' >{transcriptTrans}</p>
+          </div>
+        </div>
+
+        <div className='flex gap-10'>
+          <button onClick={() => SpeechRecognition.stopListening()}>STOP</button>
+          <button id='speack'>START</button>
+          <button class="reproductor">Reproduce tu audio</button>
+        </div>
+
+      </div>
     </>
   );
 }
