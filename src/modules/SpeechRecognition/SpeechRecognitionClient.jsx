@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-export const SpeechRecognitionContext = createContext();
+export const SpeechRecognitionClientContext = createContext();
 
-export default function SpeechRecognitionContextProvider(props) {
+export default function SpeechRecognitionClientContextProvider(props) {
 
     const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'es-ES' });
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
@@ -14,7 +14,7 @@ export default function SpeechRecognitionContextProvider(props) {
     }
 
     return (
-        <SpeechRecognitionContext.Provider value={{
+        <SpeechRecognitionClientContext.Provider value={{
             startListening,
             transcript,
             resetTranscript,
@@ -22,6 +22,6 @@ export default function SpeechRecognitionContextProvider(props) {
             SpeechRecognition
         }}>
             {props.children}
-        </SpeechRecognitionContext.Provider>
+        </SpeechRecognitionClientContext.Provider>
     )
 }

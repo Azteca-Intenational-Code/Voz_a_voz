@@ -1,14 +1,13 @@
 import { createContext, useContext, useEffect } from 'react'
-import { SpeechRecognitionContext } from './SpeechRecognition';
 import { LenguageDetection } from './LenguageDetection';
 import { GoogleTranslate } from './GoogleTranslate';
-import SSMLBuilder from "ssml-builder";
+import { SpeechRecognitionClientContext } from './SpeechRecognition/SpeechRecognitionClient';
 
 export const SpeechGenerator = createContext();
 
 export default function SpeechGeneratorProvider(props) {
 
-  const { startListening } = useContext(SpeechRecognitionContext)
+  const { startListening } = useContext(SpeechRecognitionClientContext)
   const { lenguageVoice } = useContext(LenguageDetection)
   const { transcriptTrans } = useContext(GoogleTranslate)
 
