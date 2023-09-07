@@ -51,31 +51,29 @@ export default function Operator() {
     }, [controlHabla])
 
     return (
-        <>
-            <div className="flex flex-col justify-center items-center gap-10" >
+        <div className=" bg-white p-16 shadow-2xl" >
 
-                <div>
-                    <h1>VISTA OPERADOR</h1>
-                </div>
+        <div className='text-center'>
+            <h1>OPERADOR</h1>
+        </div>
 
-                <div className='gap-20'>
-                    <div className='flex flex-col text-center gap-5  justify-center items-center'>
-                        <h2>DETECCION</h2>
-                        <p className='flex bg-slate-900 min-h-[10vh] min-w-[100%] items-center justify-center' id='trancription' >{transcript}</p>
-                    </div>
-                    <div className='flex flex-col text-center gap-5 justify-center items-center'>
-                        <h2>TRADUCCION</h2>
-                        <p className='flex bg-slate-900 min-h-[10vh] min-w-[100%] items-center justify-center' id='transcriptTrans' >{transcriptTrans}</p>
-                    </div>
-                </div>
-
-                <div className='flex gap-10'>
-                    <button onClick={() => SpeechRecognition.stopListening()}>STOP</button>
-                    <button id='speack' className='flex text-white bg-red-600 w-40 h-40 justify-center items-center rounded-full '>REC</button>
-                    {/* <button id='speack'>START</button> */}
-                </div>
+        <div className='md:flex justify-around gap-1'>
+            <div className='text-center'>
+                <h2>DETECCION</h2>
+                <textarea className='text-black' id='trancription' value={transcript} rows="4" cols="30"></textarea>
+            </div>
+            <div className='text-center'>
+                <h2>TRADUCCION</h2>
+                <textarea className='text-black' id='transcriptTrans' value={transcriptTrans} rows="4" cols="30"></textarea>
 
             </div>
-        </>
+        </div>
+
+        <div className='flex items-center justify-around'>
+            <button onClick={() => SpeechRecognition.stopListening()}>STOP</button>
+            <button id='speack' className='flex text-white bg-red-600 justify-center items-center rounded-full '>REC</button>
+        </div>
+
+    </div>
     )
 }

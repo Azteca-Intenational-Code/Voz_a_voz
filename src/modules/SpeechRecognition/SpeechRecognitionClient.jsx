@@ -5,7 +5,7 @@ export const SpeechRecognitionClientContext = createContext();
 
 export default function SpeechRecognitionClientContextProvider(props) {
 
-    const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'es-ES' });
+    const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
 
 
