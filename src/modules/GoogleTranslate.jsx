@@ -15,6 +15,8 @@ export default function GoogleTranslateProvider(props) {
   const { lenguageToTranslate } = useContext(LenguageDetection)
   const { SpeechRecognition } = useContext(SpeechRecognitionOperatorContext)
 
+  const [controlVista, setControlVista] = useState(null)
+
   function translateApi(text) {
     axios({
       method: "POST",
@@ -28,7 +30,9 @@ export default function GoogleTranslateProvider(props) {
       }),
     })
       .then((response) => {
-        SpeechRecognition.stopListening()
+        if (controlVista == 'operator') {
+          SpeechRecognition.stopListening()
+        }
         setRecordingOperator(false)
         setTranscriptTrans(response.data.translatedText)
       })
@@ -42,7 +46,9 @@ export default function GoogleTranslateProvider(props) {
       translateApi,
       recordingOperator,
       setRecordingOperator,
-      transcriptTrans
+      transcriptTrans,
+      controlVista,
+      setControlVista
     }}>
       {props.children}
     </GoogleTranslate.Provider>

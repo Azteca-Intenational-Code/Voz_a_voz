@@ -33,6 +33,13 @@ textarea {
   border-radius: 6px;
 }
 
+#chat-client {
+  border: solid;
+  border-color: black;
+  background-color: white;
+  border-radius: 6px;
+}
+
 button {
   color: white;
   border-radius: 100px;

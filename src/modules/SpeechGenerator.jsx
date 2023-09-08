@@ -17,7 +17,6 @@ export default function SpeechGeneratorProvider(props) {
 
   useEffect(() => {
     voices = window.speechSynthesis.getVoices();
-    console.log(voices)
   }, [lenguageVoice])
 
   //Monitorizacion del texto traducido

@@ -9,7 +9,7 @@ export default function Speech_IAContextProvider(props) {
     const API_KEY_SPEECH_AI = import.meta.env.VITE_API_KEY_SPEECH_AI
     const URL_API = import.meta.env.VITE_URL_API_SPEECH_AI
 
-    const { transcriptTrans } = useContext(GoogleTranslate)
+    const { transcriptTrans, controlVista } = useContext(GoogleTranslate)
 
     let playlist = [];
 
@@ -58,7 +58,9 @@ export default function Speech_IAContextProvider(props) {
     }
 
     useEffect(() => {
-        ai_speak(transcriptTrans)
+        if (controlVista == 'operator') {
+            ai_speak(transcriptTrans)
+        }
     }, [transcriptTrans])
 
     useEffect(() => {

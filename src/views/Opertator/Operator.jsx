@@ -9,7 +9,7 @@ export default function Operator() {
 
     const [time, setTime] = useState(TIME_SILENCE)
     const { LenguageDetectionResult } = useContext(LenguageDetection)
-    const { translateApi, transcriptTrans, recordingOperator, setRecordingOperator } = useContext(GoogleTranslate)
+    const { translateApi, transcriptTrans, recordingOperator, setRecordingOperator, setControlVista } = useContext(GoogleTranslate)
     const { transcript, resetTranscript, SpeechRecognition, startListening } = useContext(SpeechRecognitionOperatorContext)
 
     const [controlHabla, setControlHabla] = useState(false)
@@ -17,6 +17,10 @@ export default function Operator() {
 
     const [textContainer, setTextContainer] = useState('')
     const [timeoutId, setTimeoutId] = useState('')
+
+    useEffect(() => {
+        setControlVista('operator')
+    }, [])
 
     // manejo de la variable de control de habla y obtencion del texto impreso
     useEffect(() => {
@@ -38,7 +42,6 @@ export default function Operator() {
         let id = setTimeout(() => { // inicializacion del contador
             if (!controlHabla) {
                 if (controlDetectionLenguage && textContainer != '') {
-                    console.log(transcript)
                     LenguageDetectionResult(transcript)
                     setControlDetectionLenguage(false) //Funcion de deteccion de lenguaje 
                 }
@@ -58,23 +61,23 @@ export default function Operator() {
             </div>
 
             <div className='flex justify-center text-center font-bold'>
-                <h3 className={`w-fit  bg-red-100 border-4 px-5 rounded-full ${recordingOperator ? 'animate-pulse border-red-600 text-red-600' : 'border-red-300 text-red-300'}`}>GRABANDO</h3>
+                <h3 className={`w-fit  bg-red-100 border-4 px-5 rounded-full ${recordingOperator ? 'animate-pulse border-red-700 text-red-700' : 'border-red-200 text-red-200'}`}>GRABANDO</h3>
             </div>
 
             <div className='md:flex justify-around gap-1'>
                 <div className='text-center'>
                     <h2>DETECCION</h2>
-                    <textarea className='text-black' id='trancription' value={transcript} rows="4" cols="30"></textarea>
+                    <textarea className='text-black' id='trancription' defaultValue={transcript} rows="4" cols="30"></textarea>
                 </div>
                 <div className='text-center'>
                     <h2>TRADUCCION</h2>
-                    <textarea className='text-black' id='transcriptTrans' value={transcriptTrans} rows="4" cols="30"></textarea>
+                    <textarea className='text-black' id='transcriptTrans' defaultValue={transcriptTrans} rows="4" cols="30"></textarea>
 
                 </div>
             </div>
 
             <div className='flex items-center justify-around'>
-                <button onClick={() => {SpeechRecognition.stopListening(),  setRecordingOperator(false)}}>STOP</button>
+                <button onClick={() => { SpeechRecognition.stopListening(), setRecordingOperator(false) }}>STOP</button>
                 <button onClick={() => { startListening(), setRecordingOperator(true) }} id='speack' className='flex text-white bg-red-600 justify-center items-center rounded-full '>REC</button>
             </div>
 
