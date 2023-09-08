@@ -9,7 +9,7 @@ export default function Operator() {
 
     const [time, setTime] = useState(TIME_SILENCE)
     const { LenguageDetectionResult } = useContext(LenguageDetection)
-    const { translateApi, transcriptTrans } = useContext(GoogleTranslate)
+    const { translateApi, transcriptTrans, recordingOperator, setRecordingOperator } = useContext(GoogleTranslate)
     const { transcript, resetTranscript, SpeechRecognition, startListening } = useContext(SpeechRecognitionOperatorContext)
 
     const [controlHabla, setControlHabla] = useState(false)
@@ -53,27 +53,31 @@ export default function Operator() {
     return (
         <div className=" bg-white p-16 shadow-2xl" >
 
-        <div className='text-center'>
-            <h1>OPERADOR</h1>
-        </div>
-
-        <div className='md:flex justify-around gap-1'>
             <div className='text-center'>
-                <h2>DETECCION</h2>
-                <textarea className='text-black' id='trancription' value={transcript} rows="4" cols="30"></textarea>
+                <h1>OPERADOR</h1>
             </div>
-            <div className='text-center'>
-                <h2>TRADUCCION</h2>
-                <textarea className='text-black' id='transcriptTrans' value={transcriptTrans} rows="4" cols="30"></textarea>
 
+            <div className='flex justify-center text-center font-bold'>
+                <h3 className={`w-fit  bg-red-100 border-4 px-5 rounded-full ${recordingOperator ? 'animate-pulse border-red-600 text-red-600' : 'border-red-300 text-red-300'}`}>GRABANDO</h3>
             </div>
-        </div>
 
-        <div className='flex items-center justify-around'>
-            <button onClick={() => SpeechRecognition.stopListening()}>STOP</button>
-            <button onClick={()=> startListening()} id='speack' className='flex text-white bg-red-600 justify-center items-center rounded-full '>REC</button>
-        </div>
+            <div className='md:flex justify-around gap-1'>
+                <div className='text-center'>
+                    <h2>DETECCION</h2>
+                    <textarea className='text-black' id='trancription' value={transcript} rows="4" cols="30"></textarea>
+                </div>
+                <div className='text-center'>
+                    <h2>TRADUCCION</h2>
+                    <textarea className='text-black' id='transcriptTrans' value={transcriptTrans} rows="4" cols="30"></textarea>
 
-    </div>
+                </div>
+            </div>
+
+            <div className='flex items-center justify-around'>
+                <button onClick={() => {SpeechRecognition.stopListening(),  setRecordingOperator(false)}}>STOP</button>
+                <button onClick={() => { startListening(), setRecordingOperator(true) }} id='speack' className='flex text-white bg-red-600 justify-center items-center rounded-full '>REC</button>
+            </div>
+
+        </div>
     )
 }

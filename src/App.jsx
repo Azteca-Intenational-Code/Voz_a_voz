@@ -19,11 +19,11 @@ function App() {
     <div className='main'>
       <LenguageDetectionProvider>
         <SpeechRecognitionOperatorContextProvider>
-          <Speech_IAContextProvider>
-            <GoogleTranslateProvider>
+          <GoogleTranslateProvider>
+            <Speech_IAContextProvider>
               <RouterProvider router={routes} />
-            </GoogleTranslateProvider>
-          </Speech_IAContextProvider>
+            </Speech_IAContextProvider>
+          </GoogleTranslateProvider>
         </SpeechRecognitionOperatorContextProvider>
       </LenguageDetectionProvider>
     </div>

@@ -1,19 +1,19 @@
 import { createContext, useState, useContext } from 'react'
 import axios from 'axios';
 import { LenguageDetection } from './LenguageDetection';
-import { Speech_IAContext } from './Speech_IA';
+import { SpeechRecognitionOperatorContext } from './SpeechRecognition/SpeechRecognitionOperator';
 
 export const GoogleTranslate = createContext();
 
 export default function GoogleTranslateProvider(props) {
 
-  //uso de variables de entorno
   const API_URL_TRANSLATOR = import.meta.env.VITE_API_URL_TRANSLATOR
 
-  const { lenguageToTranslate } = useContext(LenguageDetection)
-  const { ai_speak } = useContext(Speech_IAContext)  
-
+  const [recordingOperator, setRecordingOperator] = useState(false)
   const [transcriptTrans, setTranscriptTrans] = useState('')
+
+  const { lenguageToTranslate } = useContext(LenguageDetection)
+  const { SpeechRecognition } = useContext(SpeechRecognitionOperatorContext)
 
   function translateApi(text) {
     axios({
@@ -28,7 +28,8 @@ export default function GoogleTranslateProvider(props) {
       }),
     })
       .then((response) => {
-        ai_speak(response.data.translatedText)
+        SpeechRecognition.stopListening()
+        setRecordingOperator(false)
         setTranscriptTrans(response.data.translatedText)
       })
       .catch((error) => {
@@ -39,6 +40,8 @@ export default function GoogleTranslateProvider(props) {
   return (
     <GoogleTranslate.Provider value={{
       translateApi,
+      recordingOperator,
+      setRecordingOperator,
       transcriptTrans
     }}>
       {props.children}

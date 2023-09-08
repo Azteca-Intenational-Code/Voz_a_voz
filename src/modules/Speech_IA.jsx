@@ -1,5 +1,6 @@
 import { createContext, useEffect, useContext } from 'react'
 import axios from "axios";
+import { GoogleTranslate } from './GoogleTranslate';
 
 export const Speech_IAContext = createContext();
 
@@ -7,6 +8,8 @@ export default function Speech_IAContextProvider(props) {
 
     const API_KEY_SPEECH_AI = import.meta.env.VITE_API_KEY_SPEECH_AI
     const URL_API = import.meta.env.VITE_URL_API_SPEECH_AI
+
+    const { transcriptTrans } = useContext(GoogleTranslate)
 
     let playlist = [];
 
@@ -55,8 +58,12 @@ export default function Speech_IAContextProvider(props) {
     }
 
     useEffect(() => {
+        ai_speak(transcriptTrans)
+    }, [transcriptTrans])
 
-        etiquetaAudio.addEventListener("ended", function () {
+    useEffect(() => {
+
+        etiquetaAudio.addEventListener("canplaythrough", function () {
             // Llama a la función para reproducir la siguiente pista en la cola
             playNextInPlaylist();
         });
