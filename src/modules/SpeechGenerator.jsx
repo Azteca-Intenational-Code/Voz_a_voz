@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { LenguageDetection } from './LenguageDetection';
 import { GoogleTranslate } from './GoogleTranslate';
 import { SpeechRecognitionClientContext } from './SpeechRecognition/SpeechRecognitionClient';
@@ -11,6 +11,8 @@ export default function SpeechGeneratorProvider(props) {
   const { lenguageVoice } = useContext(LenguageDetection)
   const { transcriptTrans } = useContext(GoogleTranslate)
 
+  const [clientVoice, setClientVoice] = useState(false)
+
   //Inicializacion de variables
   let speech = new SpeechSynthesisUtterance();
   let voices = [];
@@ -21,12 +23,14 @@ export default function SpeechGeneratorProvider(props) {
 
   //Monitorizacion del texto traducido
   useEffect(() => {
-    speech.text = transcriptTrans
-    speech.voice = voices[5];
-    speech.rate = 2
-    window.speechSynthesis.speak(speech)
+    console.log(clientVoice)
+    if (clientVoice) {
+      speech.text = transcriptTrans
+      speech.voice = voices[5];
+      speech.rate = 2
+      window.speechSynthesis.speak(speech)
+    }
   }, [transcriptTrans])
-
 
   useEffect(() => {
     //Evento de click al boton de start para la voz
@@ -38,7 +42,10 @@ export default function SpeechGeneratorProvider(props) {
   }, [])
 
   return (
-    <SpeechGenerator.Provider value={{}}>
+    <SpeechGenerator.Provider value={{
+      clientVoice,
+      setClientVoice
+    }}>
       {props.children}
     </SpeechGenerator.Provider>
   )

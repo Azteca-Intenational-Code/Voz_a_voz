@@ -67,11 +67,11 @@ export default function Operator() {
             <div className='md:flex justify-around gap-1'>
                 <div className='text-center'>
                     <h2>DETECCION</h2>
-                    <textarea className='text-black' id='trancription' defaultValue={transcript} rows="4" cols="30"></textarea>
+                    <textarea className='text-black' id='trancription' value={transcript} rows="4" cols="30"></textarea>
                 </div>
                 <div className='text-center'>
                     <h2>TRADUCCION</h2>
-                    <textarea className='text-black' id='transcriptTrans' defaultValue={transcriptTrans} rows="4" cols="30"></textarea>
+                    <textarea className='text-black' id='transcriptTrans' value={transcriptTrans} rows="4" cols="30"></textarea>
 
                 </div>
             </div>

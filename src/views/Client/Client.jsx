@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { LenguageDetection } from '../../modules/LenguageDetection'
 import { GoogleTranslate } from '../../modules/GoogleTranslate'
 import { SpeechRecognitionClientContext } from '../../modules/SpeechRecognition/SpeechRecognitionClient'
+import { SpeechGenerator } from '../../modules/SpeechGenerator'
 
 export default function Client() {
 
@@ -11,15 +12,15 @@ export default function Client() {
     const { LenguageDetectionResult } = useContext(LenguageDetection)
     const { translateApi, transcriptTrans, setControlVista } = useContext(GoogleTranslate)
     const { transcript, resetTranscript, SpeechRecognition, startListening } = useContext(SpeechRecognitionClientContext)
+    const { clientVoice, setClientVoice } = useContext(SpeechGenerator)
 
     const [controlHabla, setControlHabla] = useState(false)
     const [controlDetectionLenguage, setControlDetectionLenguage] = useState(true)
-
     const [textContainer, setTextContainer] = useState('')
     const [timeoutId, setTimeoutId] = useState('')
     const [messages, setMessages] = useState([]);
 
-    useEffect(() => { 
+    useEffect(() => {
         setControlVista('client')
     }, [])
 
@@ -63,21 +64,27 @@ export default function Client() {
 
 
     return (
-        <div className=" bg-white shadow-2xl p-1" >
+        <div className=" bg-white shadow-2xl p-1 px-5" >
 
             <div className='text-center'>
                 <h1>CLIENTE</h1>
             </div>
 
+            <div>
+                <div className="relative inline-block w-10 mr-2 align-middle select-none transition-all ">
+                    <input onClick={() => { setClientVoice(!clientVoice) }} type="checkbox" name="toggle" id="toggle" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
+                    <label htmlFor="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                </div>
+                <label htmlFor="toggle" className="text-xs text-gray-700">VOZ CLIENTE</label>
+            </div>
+
+
             <div className='md:flex justify-around gap-1'>
+
                 <div className='text-center'>
                     <h2>DETECCION</h2>
-                    <textarea className='text-black' id='trancription' defaultValue={transcript} rows="4" cols="30"></textarea>
+                    <textarea className='text-black' id='trancription' value={transcript} rows="4" cols="30"></textarea>
                 </div>
-                {/* <div className='text-center'>
-                    <h2>TRADUCCION</h2>
-                    <textarea className='text-black' id='transcriptTrans' value={transcriptTrans} rows="4" cols="30"></textarea>
-                </div> */}
 
                 <div className='text-center w-full'>
                     <h2>TRADUCCION</h2>
@@ -92,7 +99,6 @@ export default function Client() {
                             })
                         }
                     </div>
-                    {/* <p className='border-2 border-blue-300  rounded-md mx-2.5 p-2.5'>The longest word in any of the major English language dictionaries is pneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a lung disease contracted from the inhalation of very fine silica particles, specifically from a volcano; medically, it is the same as silicosis.</p> */}
                 </div>
             </div>
 
