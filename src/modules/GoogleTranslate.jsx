@@ -1,6 +1,7 @@
 import { createContext, useState, useContext } from 'react'
 import axios from 'axios';
 import { LenguageDetection } from './LenguageDetection';
+import { Speech_IAContext } from './Speech_IA';
 
 export const GoogleTranslate = createContext();
 
@@ -10,6 +11,7 @@ export default function GoogleTranslateProvider(props) {
   const API_URL_TRANSLATOR = import.meta.env.VITE_API_URL_TRANSLATOR
 
   const { lenguageToTranslate } = useContext(LenguageDetection)
+  const { ai_speak } = useContext(Speech_IAContext)  
 
   const [transcriptTrans, setTranscriptTrans] = useState('')
 
@@ -26,6 +28,7 @@ export default function GoogleTranslateProvider(props) {
       }),
     })
       .then((response) => {
+        ai_speak(response.data.translatedText)
         setTranscriptTrans(response.data.translatedText)
       })
       .catch((error) => {

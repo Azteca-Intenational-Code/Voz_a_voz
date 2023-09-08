@@ -16,12 +16,6 @@ export default function SpeechGeneratorProvider(props) {
   let voices = [];
 
   useEffect(() => {
-    //inicializacion de modulo de voz
-    // window.speechSynthesis.onvoiceschanged = () => {
-    //   voices = window.speechSynthesis.getVoices();
-    //   speech.voice = voices[lenguageVoice];
-    //   speech.rate = '1'
-    // };
     voices = window.speechSynthesis.getVoices();
     console.log(voices)
   }, [lenguageVoice])

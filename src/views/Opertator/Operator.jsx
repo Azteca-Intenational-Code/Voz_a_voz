@@ -10,7 +10,7 @@ export default function Operator() {
     const [time, setTime] = useState(TIME_SILENCE)
     const { LenguageDetectionResult } = useContext(LenguageDetection)
     const { translateApi, transcriptTrans } = useContext(GoogleTranslate)
-    const { transcript, resetTranscript, SpeechRecognition } = useContext(SpeechRecognitionOperatorContext)
+    const { transcript, resetTranscript, SpeechRecognition, startListening } = useContext(SpeechRecognitionOperatorContext)
 
     const [controlHabla, setControlHabla] = useState(false)
     const [controlDetectionLenguage, setControlDetectionLenguage] = useState(true)
@@ -71,7 +71,7 @@ export default function Operator() {
 
         <div className='flex items-center justify-around'>
             <button onClick={() => SpeechRecognition.stopListening()}>STOP</button>
-            <button id='speack' className='flex text-white bg-red-600 justify-center items-center rounded-full '>REC</button>
+            <button onClick={()=> startListening()} id='speack' className='flex text-white bg-red-600 justify-center items-center rounded-full '>REC</button>
         </div>
 
     </div>
