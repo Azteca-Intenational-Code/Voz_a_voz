@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react'
 import { LenguageDetection } from '../../modules/LenguageDetection'
 import { GoogleTranslate } from '../../modules/GoogleTranslate'
 import { SpeechRecognitionOperatorContext } from '../../modules/SpeechRecognition/SpeechRecognitionOperator.jsx'
-
 export default function Operator() {
 
     const TIME_SILENCE = import.meta.env.VITE_TIME_SILENCE
@@ -35,6 +34,7 @@ export default function Operator() {
     // al terminar cada insercion de habla cambiar de estado la variable de control
     useEffect(() => {
         setControlHabla(false);
+        console.log(textContainer)
     }, [textContainer])
 
     // manejo para traduccion despues de un tiempo condifurado
@@ -73,6 +73,22 @@ export default function Operator() {
                     <h2>TRADUCCION</h2>
                     <textarea className='text-black' id='transcriptTrans' value={transcriptTrans} rows="4" cols="30"></textarea>
 
+                </div>
+            </div>
+
+            <div className='p-5'>
+                <h2>RESPUESTAS PREGRABADAS</h2>
+                <div className='flex text-sm border-2 border-black p-5 gap-2'>
+                    <button onClick={() => {
+                        let etiquetaAudio = document.createElement("audio")
+                        etiquetaAudio.setAttribute("src", "src/assets/audio/operator/Presentacion.mp3"); // Establece la fuente del audio
+                        etiquetaAudio.play();
+                    }}> HOLA MI NOMBRE ES DANIEL, QUE PUEDO HACER POR TI </button>
+                    <button onClick={() => {
+                        let etiquetaAudio = document.createElement("audio")
+                        etiquetaAudio.setAttribute("src", "src/assets/audio/operator/Unmomento.mp3"); // Establece la fuente del audio
+                        etiquetaAudio.play();
+                    }}> OK, UN MOMENTO</button>
                 </div>
             </div>
 

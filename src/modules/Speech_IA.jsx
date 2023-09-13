@@ -29,7 +29,7 @@ export default function Speech_IAContextProvider(props) {
             const requestData = {
                 Engine: "neural",
                 VoiceId: "ai3-Jenny",
-                LanguageCode: "en - US",
+                LanguageCode: "en-US",
                 Text: text,
                 OutputFormat: "mp3",
                 SampleRate: "8000",
