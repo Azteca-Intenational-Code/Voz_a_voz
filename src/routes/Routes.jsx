@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import Home from '../views/home'
+import Home from '../views/Home.jsx'
 import Client from '../views/Client/Client'
 import Operator from '../views/Opertator/Operator'
 import SpeechRecognitionClientContextProvider from '../modules/SpeechRecognition/SpeechRecognitionClient'
