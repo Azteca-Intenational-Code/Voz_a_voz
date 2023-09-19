@@ -8,6 +8,7 @@ import i_look_in_my_database from "/audio/i_look_in_my_database.mp3"
 import one_moment from "/audio/one_moment.mp3"
 import one_second from "/audio/one_second.mp3"
 import wait_a_moment from "/audio/wait_a_moment.mp3"
+import have_a_nice_day from "/audio/have_a_nice_day.mp3"
 
 export default function Operator() {
 
@@ -92,14 +93,14 @@ export default function Operator() {
                     }}> Hey! thank you for calling express clean chicago, how can i help you today?</button>
                     <button onClick={() => {
                         let etiquetaAudio = document.createElement("audio")
-                        etiquetaAudio.setAttribute("src", hold_on); // Establece la fuente del audio
-                        etiquetaAudio.play();
-                    }}>hold on</button>
-                    <button onClick={() => {
-                        let etiquetaAudio = document.createElement("audio")
                         etiquetaAudio.setAttribute("src", i_look_in_my_database); // Establece la fuente del audio
                         etiquetaAudio.play();
                     }}>give me one moment while i look in my database</button>
+                    <button onClick={() => {
+                        let etiquetaAudio = document.createElement("audio")
+                        etiquetaAudio.setAttribute("src", hold_on); // Establece la fuente del audio
+                        etiquetaAudio.play();
+                    }}>hold on</button>
                     <button onClick={() => {
                         let etiquetaAudio = document.createElement("audio")
                         etiquetaAudio.setAttribute("src", one_moment); // Establece la fuente del audio
@@ -114,7 +115,11 @@ export default function Operator() {
                         let etiquetaAudio = document.createElement("audio")
                         etiquetaAudio.setAttribute("src", wait_a_moment); // Establece la fuente del audio
                         etiquetaAudio.play();
-                    }}> wait a moment</button>
+                    }}> wait a moment</button>  <button onClick={() => {
+                        let etiquetaAudio = document.createElement("audio")
+                        etiquetaAudio.setAttribute("src", have_a_nice_day); // Establece la fuente del audio
+                        etiquetaAudio.play();
+                    }}>it was nice talking to you, have a nice day!</button>
                 </div>
             </div>
 
