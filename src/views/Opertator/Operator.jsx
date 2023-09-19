@@ -81,12 +81,12 @@ export default function Operator() {
                 <div className='flex text-sm border-2 border-black p-5 gap-2'>
                     <button onClick={() => {
                         let etiquetaAudio = document.createElement("audio")
-                        etiquetaAudio.setAttribute("src", "src/assets/audio/operator/Presentacion.mp3"); // Establece la fuente del audio
+                        etiquetaAudio.setAttribute("src", "../public/audio/Presentacion.mp3"); // Establece la fuente del audio
                         etiquetaAudio.play();
                     }}> HOLA MI NOMBRE ES DANIEL, QUE PUEDO HACER POR TI </button>
                     <button onClick={() => {
                         let etiquetaAudio = document.createElement("audio")
-                        etiquetaAudio.setAttribute("src", "src/assets/audio/operator/Unmomento.mp3"); // Establece la fuente del audio
+                        etiquetaAudio.setAttribute("src", "../public/audio/Unmomento.mp3"); // Establece la fuente del audio
                         etiquetaAudio.play();
                     }}> OK, UN MOMENTO</button>
                 </div>
