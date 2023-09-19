@@ -25,7 +25,6 @@ export default function Operator() {
         setControlVista('operator')
     }, [])
 
-    // manejo de la variable de control de habla y obtencion del texto impreso
     useEffect(() => {
 
         setControlHabla(true);
