@@ -2,8 +2,8 @@ import { useState, useEffect, useContext } from 'react'
 import { LenguageDetection } from '../../modules/LenguageDetection'
 import { GoogleTranslate } from '../../modules/GoogleTranslate'
 import { SpeechRecognitionOperatorContext } from '../../modules/SpeechRecognition/SpeechRecognitionOperator.jsx'
-import Presentacion from "../../../public/audio/Presentacion.mp3"
-import Unmomento from "../../../public/audio/Unmomento.mp3"
+import Presentacion from "/audio/Presentacion.mp3"
+import Unmomento from "/public/audio/Unmomento.mp3"
 
 
 export default function Operator() {
