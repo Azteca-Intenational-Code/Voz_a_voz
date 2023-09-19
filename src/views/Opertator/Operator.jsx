@@ -2,9 +2,12 @@ import { useState, useEffect, useContext } from 'react'
 import { LenguageDetection } from '../../modules/LenguageDetection'
 import { GoogleTranslate } from '../../modules/GoogleTranslate'
 import { SpeechRecognitionOperatorContext } from '../../modules/SpeechRecognition/SpeechRecognitionOperator.jsx'
-import Presentacion from "/public/audio/Presentacion.mp3"
-import Unmomento from "/public/audio/Unmomento.mp3"
-
+import Hey_thank_you_for from "/audio/Hey_thank_you_for.mp3"
+import hold_on from "/audio/hold_on.mp3"
+import i_look_in_my_database from "/audio/i_look_in_my_database.mp3"
+import one_moment from "/audio/one_moment.mp3"
+import one_second from "/audio/one_second.mp3"
+import wait_a_moment from "/audio/wait_a_moment.mp3"
 
 export default function Operator() {
 
@@ -81,17 +84,37 @@ export default function Operator() {
 
             <div className='p-5'>
                 <h2>RESPUESTAS PREGRABADAS</h2>
-                <div className='flex text-sm border-2 border-black p-5 gap-2'>
+                <div className='grid text-sm border-2 border-black p-5 gap-2'>
                     <button onClick={() => {
                         let etiquetaAudio = document.createElement("audio")
-                        etiquetaAudio.setAttribute("src", Presentacion); // Establece la fuente del audio
+                        etiquetaAudio.setAttribute("src", Hey_thank_you_for); // Establece la fuente del audio
                         etiquetaAudio.play();
-                    }}> HOLA MI NOMBRE ES DANIEL, QUE PUEDO HACER POR TI </button>
+                    }}> Hey! thank you for calling express clean chicago, how can i help you today?</button>
                     <button onClick={() => {
                         let etiquetaAudio = document.createElement("audio")
-                        etiquetaAudio.setAttribute("src", Unmomento); // Establece la fuente del audio
+                        etiquetaAudio.setAttribute("src", hold_on); // Establece la fuente del audio
                         etiquetaAudio.play();
-                    }}> OK, UN MOMENTO</button>
+                    }}>hold on</button>
+                    <button onClick={() => {
+                        let etiquetaAudio = document.createElement("audio")
+                        etiquetaAudio.setAttribute("src", i_look_in_my_database); // Establece la fuente del audio
+                        etiquetaAudio.play();
+                    }}>give me one moment while i look in my database</button>
+                    <button onClick={() => {
+                        let etiquetaAudio = document.createElement("audio")
+                        etiquetaAudio.setAttribute("src", one_moment); // Establece la fuente del audio
+                        etiquetaAudio.play();
+                    }}> one moment </button>
+                    <button onClick={() => {
+                        let etiquetaAudio = document.createElement("audio")
+                        etiquetaAudio.setAttribute("src", one_second); // Establece la fuente del audio
+                        etiquetaAudio.play();
+                    }}> one second </button>
+                    <button onClick={() => {
+                        let etiquetaAudio = document.createElement("audio")
+                        etiquetaAudio.setAttribute("src", wait_a_moment); // Establece la fuente del audio
+                        etiquetaAudio.play();
+                    }}> wait a moment</button>
                 </div>
             </div>
 
